@@ -8,6 +8,7 @@ package view;
 import model.CategoryDAO;
 import entities.Category;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,13 +34,16 @@ public class CategoryList extends javax.swing.JFrame {
         DefaultTableModel item = (DefaultTableModel)tabCategory.getModel();
         
         item.setRowCount(0);
-        for(Category cat : categories){
+        
+        /* Adding items into the JTable through the database -- variable "catte" to run and read the table*/
+        for(Category catte : categories){
             
             Object[] line = {
             
-                    cat.getName(),
-                    cat.getType()
+                    catte.getName(),
+                    catte.getNameType()
             };
+            
         item.addRow(line);
         }
     
@@ -55,8 +59,10 @@ public class CategoryList extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabCategory = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         tabCategory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,25 +71,67 @@ public class CategoryList extends javax.swing.JFrame {
             new String [] {
                 "Categories", "Type"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabCategory);
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 134, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
+                .addGap(0, 47, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int line = tabCategory.getSelectedRow();
+        
+        if (line > -1) {
+            Category selectCategory = categories.get(line);
+            int option = JOptionPane.showConfirmDialog(this, "Do you really want to delete a " + selectCategory.getName() + "?", "Confirm the action", JOptionPane.YES_NO_OPTION);
+            
+            if (option == JOptionPane.YES_OPTION) {
+                /* Here's the code for deleting an option */
+                if (CategoryDAO.delete(selectCategory.getId())) {
+                    JOptionPane.showMessageDialog(this, "Category deleted successfully!");
+                    /* Updating the category list after any modification that might occur */
+                    gettingCategoryList();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error occurred when deleting the category" + selectCategory.getName() + ".");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please, select one category to delete it.");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +169,7 @@ public class CategoryList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabCategory;
     // End of variables declaration//GEN-END:variables

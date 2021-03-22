@@ -29,4 +29,28 @@ public class Category {
     public void setType(char type) {
         this.type = type;
     }
+    
+    /* Return info of Film or Game -- EXTRA CONTENT */
+    public String getNameType() {
+        return type == 'F' ? "Film" : "Game"; 
+    }
+        /* if (type == 'F') {
+            return "Film";
+        } else if (type == 'G') {
+            return "Game";
+        } else {
+            return "TV Series";
+        }
+        
+        */
+    
+    
+    @Override
+    public String toString() {
+        return "Category"
+                + "\n" + "id:=" + id
+                + "\n" + "name:=" + name 
+                + "\n" + "type:=" + type;
+    }
+    
 }
