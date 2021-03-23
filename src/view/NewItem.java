@@ -17,12 +17,24 @@ public class NewItem extends javax.swing.JFrame {
     
     
     private Category category = new Category();
+    private CategoryList viewList;
 
     /**
      * Creates new form NewItem
      */
-    public NewItem() {
+    public NewItem(CategoryList viewList) {
         initComponents();
+        this.viewList = viewList;
+    }
+    
+    public void setCategory (Category category) {
+        this.category = category;
+        txtCategory.setText(category.getName());
+        if (category.getType() == 'F') {
+            jRButnFilm.setSelected(true);
+        } else if(category.getType() == 'G') {
+            jRBtnGame.setSelected(true);
+        }
     }
 
     /**
@@ -42,7 +54,7 @@ public class NewItem extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Category");
 
@@ -60,7 +72,7 @@ public class NewItem extends javax.swing.JFrame {
 
         jLabel2.setText("Type");
 
-        btnSave.setText("save");
+        btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -82,7 +94,7 @@ public class NewItem extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +111,7 @@ public class NewItem extends javax.swing.JFrame {
                     .addComponent(jRBtnGame))
                 .addGap(42, 42, 42)
                 .addComponent(btnSave)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,8 +126,7 @@ public class NewItem extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        
+ 
         category.setName(txtCategory.getText());
         if(jRButnFilm.isSelected()){
                category.setType('F');
@@ -125,53 +136,40 @@ public class NewItem extends javax.swing.JFrame {
             
         }
         if (category.getType() != ' '){
-            if(CategoryDAO.insert(category)){
-                JOptionPane.showMessageDialog(this, "Successfully add a new category");
-            }else {
-                JOptionPane.showMessageDialog(this, "Error to add a new category");
+            
+            if(category.getId() == 0) {
+                insert();
+            } else {
+                change();
             }
+            
         }else {
-            JOptionPane.showMessageDialog(this, "select the category type");
+            JOptionPane.showMessageDialog(this, "Select the category type");
         }
         
         
     }//GEN-LAST:event_btnSaveActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    
+      private void insert() {
+          if(CategoryDAO.insert(category)){
+                JOptionPane.showMessageDialog(this, "New category added successfully!");
+                viewList.gettingCategoryList();
+                dispose(); /* To close the NewItem screen*/
+            }else {
+                JOptionPane.showMessageDialog(this, "Error to add the new category");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewItem().setVisible(true);
+      }
+    
+      
+      private void change() {
+          if(CategoryDAO.change(category)){
+                JOptionPane.showMessageDialog(this, "New category changed successfully!");
+                viewList.gettingCategoryList();
+                dispose(); /* To close the NewItem screen*/
+            }else {
+                JOptionPane.showMessageDialog(this, "Error to change the new category");
             }
-        });
-    }
-
+      }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup gRBType;

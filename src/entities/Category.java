@@ -48,9 +48,9 @@ public class Category {
     @Override
     public String toString() {
         return "Category"
-                + "\n" + "id:=" + id
-                + "\n" + "name:=" + name 
-                + "\n" + "type:=" + type;
+                + "\n" + "ID = " + id
+                + "\n" + "Name = " + name 
+                + "\n" + "Type = " + type;
     }
     
 }

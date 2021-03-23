@@ -17,7 +17,7 @@ public class TestCategory {
         //System.out.println(CategoryDAO.change(category));
         //System.out.println(CategoryDAO.delete(12));
         
-        System.out.println(CategoryDAO.list());
+        //System.out.println(CategoryDAO.list());
         
     }
     

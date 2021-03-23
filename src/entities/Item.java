@@ -4,10 +4,11 @@ public class Item {
     
     private int id;
     private String title;
-    private String description;
+    private String synopsis;
     private double price;
     private Category category;
     private int quantity;
+    private int rentPeriod;
     
     public Item(Category category){
         this.category = category;
@@ -30,12 +31,12 @@ public class Item {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSynopsis() {
+        return synopsis;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public double getPrice() {
@@ -57,4 +58,17 @@ public class Item {
     public int getQuantity() {
         return quantity;
     }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+   
+    public int getRentPeriod() {
+        return rentPeriod;
+    }
+
+    public void setRentPeriod(int rentPeriod) {
+        this.rentPeriod = rentPeriod;
+    }
+    
 }
