@@ -6,35 +6,37 @@ public class Film extends Item {
         super(category);
     }
 
-    private String director;
-    private int time;
+    private String filmDirector;
+    private int filmTime;
 
-    public String getDirector() {
-        return director;
+   
+    public String getFilmDirector() {
+        return filmDirector;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
+    public void setFilmDirector(String filmDirector) {
+        this.filmDirector = filmDirector;
     }
 
-    public int getTime() {
-        return time;
+    public int getFilmTime() {
+        return filmTime;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setFilmTime(int filmTime) {
+        this.filmTime = filmTime;
     }
     
     @Override
     public String toString() {
         return "Film" 
-                + "\n" + "ID = " + getId()
-                + "\n" + "Director = " + director
-                + "\n" + "Time = " + time
-                + "\n" + "Title = " + getTitle() 
-                + "\n" + "Synopsis = " + getSynopsis()
-                + "\n" + "Price = " + getPrice()
-                + "\n" + "Rental Period = " + getRentPeriod()
-                + "\n" + "Category = " + getCategory();
+                + "\n" + "ID = " + getItemId()
+                + "\n" + "Director = " + filmDirector
+                + "\n" + "Time = " + filmTime
+                + "\n" + "Title = " + getItemTitle() 
+                + "\n" + "Synopsis = " + getItemSynopsis()
+                + "\n" + "Price = " + getItemPrice()
+                + "\n" + "Rental Period = " + getItemRentPeriod()
+                + "\n" + "Category = " + getItemCategory();
     }
+
 }

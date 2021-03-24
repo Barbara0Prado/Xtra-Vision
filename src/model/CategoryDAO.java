@@ -17,8 +17,8 @@ public class CategoryDAO {
             String sql ="INSERT INTO category (name, type) "
                     + "VALUES (?, ?)"; 
             PreparedStatement command = connect.prepareStatement(sql);
-            command.setString(1, category.getName());
-            command.setString(2, String.valueOf( category.getType()));
+            command.setString(1, category.getCategoryName());
+            command.setString(2, String.valueOf( category.getCategoryType()));
             command.execute();
             command.close();
             
@@ -33,16 +33,16 @@ public class CategoryDAO {
     public static boolean change(Category category){
     
         try {
-            Connection cnn = Connect.getConnect();
+            Connection connect = Connect.getConnect();
             String sql = "UPDATE category SET " 
                     + " name= ?"
                     + " type = ?" 
                     + " WHERE id = ?";
             
-            PreparedStatement command = cnn.prepareStatement(sql);
-            command.setString(1, category.getName());
-            command.setString(2, String.valueOf(category.getType()));
-            command.setInt(3, category.getId());
+            PreparedStatement command = connect.prepareStatement(sql);
+            command.setString(1, category.getCategoryName());
+            command.setString(2, String.valueOf(category.getCategoryType()));
+            command.setInt(3, category.getCategoryId());
             
             
             int nrLines = command.executeUpdate();
@@ -58,9 +58,9 @@ public class CategoryDAO {
     public static boolean delete(int id){
     
         try {
-            Connection cnn = Connect.getConnect();
+            Connection connect = Connect.getConnect();
             String sql = "DELETE FROM category WHERE id = ?";
-            PreparedStatement command = cnn.prepareStatement(sql);
+            PreparedStatement command = connect.prepareStatement(sql);
             command.setInt(1, id);
             int nrLines = command.executeUpdate();
             command.close();
@@ -85,9 +85,9 @@ public class CategoryDAO {
             ResultSet result = command.executeQuery(sql);
             while(result.next()){
                 Category cat = new Category();
-                cat.setId(result.getInt("id"));
-                cat.setName(result.getString("name"));
-                cat.setType(result.getString("type").charAt(0));
+                cat.setCategoryId(result.getInt("id"));
+                cat.setCategoryName(result.getString("name"));
+                cat.setCategoryType(result.getString("type").charAt(0));
                 categories.add(cat);
                 
             }

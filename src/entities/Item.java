@@ -2,73 +2,74 @@ package entities;
 
 public class Item {
     
-    private int id;
-    private String title;
-    private String synopsis;
-    private double price;
-    private Category category;
-    private int quantity;
-    private int rentPeriod;
+    private int itemId;
+    private String itemTitle;
+    private String itemSynopsis;
+    private double itemPrice;
+    private Category itemCategory;
+    private int itemAvailability;
+    private int itemRentPeriod;
     
     public Item(Category category){
-        this.category = category;
+        this.itemCategory = category;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+    }
+
+    public String getItemSynopsis() {
+        return itemSynopsis;
+    }
+
+    public void setItemSynopsis(String itemSynopsis) {
+        this.itemSynopsis = itemSynopsis;
+    }
+
+    public double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public Category getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(Category itemCategory) {
+        this.itemCategory = itemCategory;
+    }
+
+    public int getItemAvailability() {
+        return itemAvailability;
+    }
+
+    public void setItemAvailability(int itemAvailability) {
+        this.itemAvailability = itemAvailability;
+    }
+
+    public int getItemRentPeriod() {
+        return itemRentPeriod;
+    }
+
+    public void setItemRentPeriod(int itemRentPeriod) {
+        this.itemRentPeriod = itemRentPeriod;
     }
 
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-    
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-   
-    public int getRentPeriod() {
-        return rentPeriod;
-    }
-
-    public void setRentPeriod(int rentPeriod) {
-        this.rentPeriod = rentPeriod;
-    }
     
 }

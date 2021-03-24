@@ -2,23 +2,27 @@ package entities;
 
 public class ItemRent {
     
-    private int id;
-    private double price;
-    Film film;
+    private int itemRentId;
+    private double itemRentPrice;
+    
+     Film film;
 
-    public int getId() {
-        return id;
+    public int getItemRentId() {
+        return itemRentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setItemRentId(int itemRentId) {
+        this.itemRentId = itemRentId;
     }
 
-    public double getPrice() {
-        return price;
+    public double getItemRentPrice() {
+        return itemRentPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setItemRentPrice(double itemRentPrice) {
+        this.itemRentPrice = itemRentPrice;
     }
+   
+
+    
 }

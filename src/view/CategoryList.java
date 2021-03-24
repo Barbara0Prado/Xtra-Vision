@@ -35,13 +35,13 @@ public class CategoryList extends javax.swing.JFrame {
         
         item.setRowCount(0);
         
-        /* Adding items into the JTable through the database -- variable "catte" to run and read the table*/
-        for(Category catte : categories){
+        /* Adding items into the JTable through the database -- variable "categoryRun" to run and read the table*/
+        for(Category categoryRun : categories){
             
             Object[] line = {
             
-                    catte.getName(),
-                    catte.getNameType()
+                    categoryRun.getCategoryName(),
+                    categoryRun.getCategoryType()// possivel erro aqui
             };
             
         item.addRow(line);
@@ -141,16 +141,16 @@ public class CategoryList extends javax.swing.JFrame {
         
         if (line > -1) {
             Category selectCategory = categories.get(line);
-            int option = JOptionPane.showConfirmDialog(this, "Do you really want to delete a " + selectCategory.getName() + "?", "Confirm the action", JOptionPane.YES_NO_OPTION);
+            int option = JOptionPane.showConfirmDialog(this, "Do you really want to delete a " + selectCategory.getCategoryName()+ "?", "Confirm the action", JOptionPane.YES_NO_OPTION);
             
             if (option == JOptionPane.YES_OPTION) {
                 /* Here's the code for deleting an option */
-                if (CategoryDAO.delete(selectCategory.getId())) {
+                if (CategoryDAO.delete(selectCategory.getCategoryId())) {
                     JOptionPane.showMessageDialog(this, "Category deleted successfully!");
                     /* Updating the category list after any modification that might occur */
                     gettingCategoryList();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Error occurred when deleting the category" + selectCategory.getName() + ".");
+                    JOptionPane.showMessageDialog(this, "Error occurred when deleting the category" + selectCategory.getCategoryName()+ ".");
                 }
             }
         } else {
@@ -169,10 +169,10 @@ public class CategoryList extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please, select one category to change it.");
         } else {
             Category changeCategory = categories.get(line);
-            NewItem addNewItem = new NewItem(this);
+            NewItem changeItem = new NewItem(this);
             /* The category selected is sent to the changing option (screen) */
-            addNewItem.setCategory(changeCategory); 
-            addNewItem.setVisible(true);
+            changeItem.setCategory(changeCategory); 
+            changeItem.setVisible(true);
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 

@@ -14,8 +14,8 @@ public class Connect {
     public static Connection getConnect(){
      
         try {
-            Connection cnn = DriverManager.getConnection(URL, USER, PASS);
-            return cnn;
+            Connection connect = DriverManager.getConnection(URL, USER, PASS);
+            return connect;
         } catch (Exception e) {
             return null;
         }

@@ -3,41 +3,43 @@ package entities;
 
 public class Client {
     
-    private int id;
-    private String name;
-    private String email;
-    private int phone;
+    private int clientId;
+    private String clientName;
+    private String clientEmail;
+    private int clientPhone;
 
-    public int getId() {
-        return id;
+    
+
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
-    public String getName() {
-        return name;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getClientEmail() {
+        return clientEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
     }
 
-    public int getPhone() {
-        return phone;
+    public int getClientPhone() {
+        return clientPhone;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setClientPhone(int clientPhone) {
+        this.clientPhone = clientPhone;
     }
     
 }

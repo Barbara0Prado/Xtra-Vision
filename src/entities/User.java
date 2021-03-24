@@ -3,40 +3,42 @@ package entities;
 
 
 public class User {
-    private int id;
-    private String name;
-    private String login;
-    private String pass;
+    private int userId;
+    private String userName;
+    private String userLogin;
+    private String userPass;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
-    public String getPass() {
-        return pass;
+    public String getUserPass() {
+        return userPass;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-}
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
+
+    
 }

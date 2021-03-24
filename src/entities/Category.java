@@ -2,38 +2,37 @@ package entities;
 
 public class Category {
     
-    private int id;
-    private String name;
-    private char type;
+    private int categoryId;
+    private String categoryName;
+    private char categoryType;
 
-    public int getId() {
-        return id;
-    }
- 
-    public void setId(int id) {
-        this.id = id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public String getName() {
-        return name;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public char getType() {
-        return type;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public void setType(char type) {
-        this.type = type;
+    public char getCategoryType() {
+        return categoryType;
     }
+
+    public void setCategoryType(char categoryType) {
+        this.categoryType = categoryType;
+    }
+  
     
     /* Return info of Film or Game -- EXTRA CONTENT */
-    public String getNameType() {
-        return type == 'F' ? "Film" : "Game"; 
-    }
+   
         /* if (type == 'F') {
             return "Film";
         } else if (type == 'G') {
@@ -48,9 +47,10 @@ public class Category {
     @Override
     public String toString() {
         return "Category"
-                + "\n" + "ID = " + id
-                + "\n" + "Name = " + name 
-                + "\n" + "Type = " + type;
+                + "\n" + "ID = " + categoryId
+                + "\n" + "Name = " + categoryName 
+                + "\n" + "Type = " + categoryType;
     }
-    
+
+      
 }

@@ -29,10 +29,10 @@ public class NewItem extends javax.swing.JFrame {
     
     public void setCategory (Category category) {
         this.category = category;
-        txtCategory.setText(category.getName());
-        if (category.getType() == 'F') {
+        txtCategory.setText(category.getCategoryName());
+        if (category.getCategoryType()== 'F') {
             jRButnFilm.setSelected(true);
-        } else if(category.getType() == 'G') {
+        } else if(category.getCategoryType() == 'G') {
             jRBtnGame.setSelected(true);
         }
     }
@@ -127,17 +127,17 @@ public class NewItem extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
  
-        category.setName(txtCategory.getText());
+        category.setCategoryName(txtCategory.getText());
         if(jRButnFilm.isSelected()){
-               category.setType('F');
+               category.setCategoryType('F');
                
         }else if (jRBtnGame.isSelected()){
-            category.setType('G');
+            category.setCategoryType('G');
             
         }
-        if (category.getType() != ' '){
+        if (category.getCategoryType() != ' '){
             
-            if(category.getId() == 0) {
+            if(category.getCategoryId() == 0) {
                 insert();
             } else {
                 change();
