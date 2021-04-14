@@ -1,5 +1,5 @@
 
-package entities;
+package model;
 
 public class Client {
     
