@@ -41,5 +41,9 @@ public class Client {
     public void setClientPhone(int clientPhone) {
         this.clientPhone = clientPhone;
     }
+     @Override
+    public String toString() {
+        return getClientId() + "";
+    }
     
 }

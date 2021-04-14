@@ -1,13 +1,17 @@
 package entities;
  
-public class Film extends Item {
+public class Film {
     
-    public Film(Category category){
-        super(category);
-    }
+  
 
     private String filmDirector;
     private int filmTime;
+    private int filmId;
+    private int categoryId;
+    private String title;
+    private int year;
+    private String categoryName;
+    
 
    
     public String getFilmDirector() {
@@ -26,17 +30,49 @@ public class Film extends Item {
         this.filmTime = filmTime;
     }
     
-    @Override
-    public String toString() {
-        return "Film" 
-                + "\n" + "ID = " + getItemId()
-                + "\n" + "Director = " + filmDirector
-                + "\n" + "Time = " + filmTime
-                + "\n" + "Title = " + getItemTitle() 
-                + "\n" + "Synopsis = " + getItemSynopsis()
-                + "\n" + "Price = " + getItemPrice()
-                + "\n" + "Rental Period = " + getItemRentPeriod()
-                + "\n" + "Category = " + getItemCategory();
+
+    public int getFilmId() {
+        return filmId;
     }
 
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String titulo) {
+        this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoriaName) {
+        this.categoryName = categoriaName;
+    }
+
+    @Override
+    public String toString() {
+        return getFilmId() + "";
+    }
 }

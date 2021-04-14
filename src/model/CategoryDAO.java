@@ -36,13 +36,13 @@ public class CategoryDAO {
             Connection connect = Connect.getConnect();
             String sql = "UPDATE category SET " 
                     + " name= ?"
-                    + " type = ?" 
-                    + " WHERE id = ?";
+                    + " type = ?" ;
+                   // + " WHERE id = ?";
             
             PreparedStatement command = connect.prepareStatement(sql);
             command.setString(1, category.getCategoryName());
             command.setString(2, String.valueOf(category.getCategoryType()));
-            command.setInt(3, category.getCategoryId());
+            //command.setInt(3, category.getCategoryId());
             
             
             int nrLines = command.executeUpdate();

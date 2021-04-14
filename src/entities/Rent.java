@@ -10,11 +10,12 @@ public class Rent {
     private Date rentDate;
     private Client rentClient;
     private User rentUser;
+    private String returnDate;
         
     //in case that we want to use more than one object for renting
     //use an arrayList for storage all objects
 
-    private ArrayList< ItemRent> itemRent;
+ 
     
      
     public int getRentId() {
@@ -56,12 +57,16 @@ public class Rent {
     public void setRentUser(User rentUser) {
         this.rentUser = rentUser;
     } 
+
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
                          
-    public ArrayList< ItemRent> getItemRent() {
-        return itemRent;
-    }
-    public void setItemRent(ArrayList< ItemRent> itemRent) {
-        this.itemRent = itemRent;
-    }
+   
 
 }
