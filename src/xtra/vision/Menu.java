@@ -5,6 +5,9 @@
  */
 package xtra.vision;
 
+import view.ViewCategory;
+import view.ViewReturnFilm;
+
 /**
  *
  * @author barba
@@ -73,6 +76,11 @@ public class Menu extends javax.swing.JFrame {
         jBReturn.setBackground(java.awt.Color.black);
         jBReturn.setForeground(java.awt.Color.white);
         jBReturn.setText("RETURN FILM");
+        jBReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReturnActionPerformed(evt);
+            }
+        });
 
         jLLogo.setBackground(java.awt.Color.white);
         jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/LOGOFILHODAPUTA.png"))); // NOI18N
@@ -198,7 +206,7 @@ public class Menu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -245,8 +253,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBHomeActionPerformed
 
     private void jBCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCategoriesActionPerformed
-
+        new ViewCategory().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCategoriesActionPerformed
+
+    private void jBReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReturnActionPerformed
+          new ViewReturnFilm().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBReturnActionPerformed
 
     /**
      * @param args the command line arguments

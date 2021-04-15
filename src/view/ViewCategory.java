@@ -45,10 +45,14 @@ public class ViewCategory extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.darkGray);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1104, 543));
 
         jPanel2.setBackground(java.awt.Color.white);
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setAlignmentY(0.0F);
 
         jBHome.setBackground(java.awt.Color.black);
+        jBHome.setForeground(java.awt.Color.white);
         jBHome.setText("HOME");
         jBHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +61,7 @@ public class ViewCategory extends javax.swing.JFrame {
         });
 
         jBCategories.setBackground(java.awt.Color.black);
+        jBCategories.setForeground(java.awt.Color.white);
         jBCategories.setText("CATEGORIES");
         jBCategories.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,10 +70,16 @@ public class ViewCategory extends javax.swing.JFrame {
         });
 
         jBReturn.setBackground(java.awt.Color.black);
+        jBReturn.setForeground(java.awt.Color.white);
         jBReturn.setText("RETURN FILM");
+        jBReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReturnActionPerformed(evt);
+            }
+        });
 
         jLLogo.setBackground(java.awt.Color.white);
-        jLLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\barba\\OneDrive\\Documents\\Xtra-Vision Program\\LOGOFILHODAPUTA.png")); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/LOGOFILHODAPUTA.png"))); // NOI18N
         jLLogo.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -92,7 +103,7 @@ public class ViewCategory extends javax.swing.JFrame {
                 .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(jBCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102)
                 .addComponent(jBReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,6 +111,9 @@ public class ViewCategory extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(java.awt.Color.white);
+        jPanel3.setAlignmentX(0.0F);
+        jPanel3.setAlignmentY(0.0F);
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTextField1.setText("Search Film");
 
@@ -112,11 +126,11 @@ public class ViewCategory extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(634, Short.MAX_VALUE)
+                .addContainerGap(420, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(jBSearch)
-                .addGap(73, 73, 73))
+                .addGap(169, 169, 169))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +146,7 @@ public class ViewCategory extends javax.swing.JFrame {
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Categories");
 
-        jCSelectCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Action" }));
+        jCSelectCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Action", "Anime", "Comedies", "Crimes", "Dramas", "Fantasy", "Horror", "Musicals", "Romance", "Sci-Fi", "Thriller" }));
         jCSelectCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCSelectCategoryActionPerformed(evt);
@@ -145,14 +159,14 @@ public class ViewCategory extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,21 +184,11 @@ public class ViewCategory extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1185, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
         );
 
         pack();
@@ -192,19 +196,26 @@ public class ViewCategory extends javax.swing.JFrame {
 
     private void jBHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHomeActionPerformed
         new Menu().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBHomeActionPerformed
 
     private void jBCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCategoriesActionPerformed
-
+        new ViewCategory().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCategoriesActionPerformed
 
     private void jCSelectCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSelectCategoryActionPerformed
         String[] categoryString = {"Action", "Anime", "Comedies", "Crimes", "Dramas", "Fantasy", "Horror", "Musicals", "Romance", "Sci-Fi", "Thriller"};
 
         JComboBox categoryList = new JComboBox (categoryString);
-        categoryList.setSelectedIndex(4);
+        categoryList.setSelectedIndex(1);
         categoryList.addActionListener(categoryList);
     }//GEN-LAST:event_jCSelectCategoryActionPerformed
+
+    private void jBReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReturnActionPerformed
+         new ViewReturnFilm().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBReturnActionPerformed
 
     /**
      * @param args the command line arguments
