@@ -1,14 +1,14 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Rent {
     
     private int rentId;
     private double rentPrice;
-    private Date rentDate;
-    private Client rentClient;
+    private String rentDate;
+    private int rentClient;
     private User rentUser;
     private String returnDate;
         
@@ -34,20 +34,20 @@ public class Rent {
         this.rentPrice = rentPrice;
     }
 
-    public Date getRentDate() {
+    public String getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(Date rentDate) {
+    public void setRentDate(String rentDate) {
         this.rentDate = rentDate;
     }
 
-    public Client getRentClient() {
+    public int getRentClient() {
         return rentClient;
     }
 
     public void setRentClient(Client rentClient) {
-        this.rentClient = rentClient;
+        this.setRentClient(rentClient);
     }
 
     public User getRentUser() {
@@ -65,6 +65,10 @@ public class Rent {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public void setRentClient(int rentClient) {
+        this.rentClient = rentClient;
     }
                          
    
