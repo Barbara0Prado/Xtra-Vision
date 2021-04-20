@@ -11,6 +11,13 @@ import javax.swing.JOptionPane;
 
 public class FilmDAO {
 
+     // Talvez de erro no codigo //
+  
+    public static ArrayList<Film> list() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
+
     public void insertFilm (Film film) {
         
         Connection con = Connect.getConnect();

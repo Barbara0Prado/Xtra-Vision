@@ -11,6 +11,7 @@ public class Film {
     private String title;
     private int year;
     private String categoryName;
+    private String synopsis;
     
 
    
@@ -70,9 +71,17 @@ public class Film {
     public void setCategoryName(String categoriaName) {
         this.categoryName = categoriaName;
     }
+    public String getSynopsis() {
+        return synopsis;
+    }
 
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+    
     @Override
     public String toString() {
         return getFilmId() + "";
     }
+    
 }

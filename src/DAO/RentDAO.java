@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Rent;
-import model.Client;
 
 
 public class RentDAO {
