@@ -5,6 +5,7 @@ import javax.swing.JComboBox;
 import xtra.vision.Menu;
 import DAO.Connect;
 import DAO.FilmDAO;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Film;
 
 
 public class ViewCategory extends javax.swing.JFrame {
+    
+     FilmDAO dao = new FilmDAO();
+    
     ArrayList<Film> films;
     Connection con = Connect.getConnect();
     PreparedStatement stmt = null;
@@ -46,6 +51,7 @@ public class ViewCategory extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTFilms = new javax.swing.JTable();
+        jBSearchCategory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +126,13 @@ public class ViewCategory extends javax.swing.JFrame {
         jTFilms.setToolTipText("Select");
         jScrollPane1.setViewportView(jTFilms);
 
+        jBSearchCategory.setText("Search");
+        jBSearchCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSearchCategoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -131,7 +144,9 @@ public class ViewCategory extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBSearchCategory)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -140,7 +155,8 @@ public class ViewCategory extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSearchCategory))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -210,7 +226,9 @@ public class ViewCategory extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCategoriesActionPerformed
 
     private void jCSelectCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSelectCategoryActionPerformed
- 
+        
+       // jCSelectCategory.addActionListener(new ActionListener() {
+       // public void actionPerformed(ActionEvent event) {
     }//GEN-LAST:event_jCSelectCategoryActionPerformed
 
     private void jBReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReturnActionPerformed
@@ -226,6 +244,10 @@ public class ViewCategory extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jCSelectCategoryAncestorAdded
+
+    private void jBSearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchCategoryActionPerformed
+              
+    }//GEN-LAST:event_jBSearchCategoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +289,7 @@ public class ViewCategory extends javax.swing.JFrame {
     private javax.swing.JButton jBCategories;
     private javax.swing.JButton jBHome;
     private javax.swing.JButton jBReturn;
+    private javax.swing.JButton jBSearchCategory;
     private javax.swing.JComboBox jCSelectCategory;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLabel1;
@@ -290,4 +313,18 @@ public class ViewCategory extends javax.swing.JFrame {
         }
     }
 
-}
+     public void ShowAllFilms() {
+        DefaultTableModel tableFilms = (DefaultTableModel) jTFilms.getModel();
+        tableFilms.setNumRows(0);
+
+        for (Film f : dao.showAllFilms()) {
+            tableFilms.addRow(new Object[]{
+                f.getFilmId(),
+                f.getTitle(),
+                f.getYear(),
+                f.getFilmTime(),
+                f.getCategoryName()
+            });
+        }
+    }
+        }
