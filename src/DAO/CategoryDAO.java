@@ -36,6 +36,10 @@ public class CategoryDAO {
 
         return list;
     }
+//    possivel codigo aqui
+//    public List<Film> listFimByCategory(Integer categoryId){
+//         stmt = con.prepareStatement("SELECT * FROM film where categoryId = ? ");
+//    }
 
     public List<Category> checkIdCategory(String name) {
         List<Category> list = new ArrayList<>();
@@ -161,6 +165,39 @@ public class CategoryDAO {
                 Category category = new Category();
                 category.setCategoryId(rs.getInt("categoryId"));
                 category.setCategoryName(rs.getString("name"));
+
+                findCategory = true;
+
+                list.add(category);
+            }
+
+            if (!findCategory) {
+                JOptionPane.showMessageDialog(null, "Category not found", "Xtra-Vision",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            System.err.println("CategoryDAO: " + ex);
+        } finally {
+            Connect.closeConnection(con, stmt, rs);
+        }
+
+        return list;
+    }
+    public List<Category> showAllCategory() {
+        List<Category> list = new ArrayList<>();
+        boolean findCategory = false;
+        Connection con = Connect.getConnect();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT categoryId, categoryName FROM category ORDER BY categoryName ASC");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Category category = new Category();
+                category.setCategoryId(rs.getInt("categoryId"));
+                category.setCategoryName(rs.getString("categoryName"));
 
                 findCategory = true;
 

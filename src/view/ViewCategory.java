@@ -4,7 +4,7 @@ package view;
 import javax.swing.JComboBox;
 import xtra.vision.Menu;
 import DAO.Connect;
-import DAO.FilmDAO;
+import DAO.CategoryDAO;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,27 +15,26 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
-import model.Film;
 
 
 public class ViewCategory extends javax.swing.JFrame {
     
-     FilmDAO dao = new FilmDAO();
+     CategoryDAO dao = new CategoryDAO();
     
-    ArrayList<Film> films;
-    Connection con = Connect.getConnect();
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
+    
+    //Connection con = Connect.getConnect();
+   // PreparedStatement stmt = null;
+   // ResultSet rs = null;
 
     public ViewCategory() {      
         initComponents();
-        Fillcombo();
+        //Fillcombo();
     }
     
-    public void GettingFilmList() {
-        films = FilmDAO.list();
+    //public void GettingFilmList() {
+       // films = FilmDAO.list();
         
-    }
+    //}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,18 +46,20 @@ public class ViewCategory extends javax.swing.JFrame {
         jBHome = new javax.swing.JButton();
         jLLogo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jCSelectCategory = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTFilms = new javax.swing.JTable();
+        jTCategories = new javax.swing.JTable();
         jBSearchCategory = new javax.swing.JButton();
+        jTSearchCategory = new javax.swing.JTextField();
+        jBShowAllCategories = new javax.swing.JButton();
+        jBSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setPreferredSize(new java.awt.Dimension(1104, 543));
 
-        jBReturn.setBackground(java.awt.Color.black);
+        jBReturn.setBackground(java.awt.Color.darkGray);
         jBReturn.setForeground(java.awt.Color.white);
         jBReturn.setText("RETURN FILM");
         jBReturn.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +68,7 @@ public class ViewCategory extends javax.swing.JFrame {
             }
         });
 
-        jBCategories.setBackground(java.awt.Color.black);
+        jBCategories.setBackground(java.awt.Color.darkGray);
         jBCategories.setForeground(java.awt.Color.white);
         jBCategories.setText("CATEGORIES");
         jBCategories.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +77,7 @@ public class ViewCategory extends javax.swing.JFrame {
             }
         });
 
-        jBHome.setBackground(java.awt.Color.black);
+        jBHome.setBackground(java.awt.Color.darkGray);
         jBHome.setForeground(java.awt.Color.white);
         jBHome.setText("HOME");
         jBHome.addActionListener(new java.awt.event.ActionListener() {
@@ -93,43 +94,32 @@ public class ViewCategory extends javax.swing.JFrame {
         jPanel4.setToolTipText("");
         jPanel4.setName("Select"); // NOI18N
 
-        jCSelectCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
-        jCSelectCategory.setName(""); // NOI18N
-        jCSelectCategory.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jCSelectCategoryAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jCSelectCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCSelectCategoryActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.white);
         jLabel1.setText("Categories");
 
-        jTFilms.setForeground(java.awt.Color.white);
-        jTFilms.setModel(new javax.swing.table.DefaultTableModel(
+        jTCategories.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title", "Synopsis", "Director", "Time", "Price"
+                "Category Id", "Category"
             }
         ));
-        jTFilms.setToolTipText("Select");
-        jScrollPane1.setViewportView(jTFilms);
+        jTCategories.setToolTipText("Select");
+        jScrollPane1.setViewportView(jTCategories);
 
         jBSearchCategory.setText("Search");
         jBSearchCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSearchCategoryActionPerformed(evt);
+            }
+        });
+
+        jBShowAllCategories.setText("Show All");
+        jBShowAllCategories.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBShowAllCategoriesActionPerformed(evt);
             }
         });
 
@@ -143,24 +133,36 @@ public class ViewCategory extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTSearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBSearchCategory)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(jBSearchCategory)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBShowAllCategories)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCSelectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSearchCategory))
+                    .addComponent(jBSearchCategory)
+                    .addComponent(jTSearchCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBShowAllCategories))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
+
+        jBSearch.setBackground(java.awt.Color.darkGray);
+        jBSearch.setForeground(java.awt.Color.white);
+        jBSearch.setText("SEARCH");
+        jBSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,34 +170,36 @@ public class ViewCategory extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(26, 26, 26)
-                            .addComponent(jBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jBCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jBReturn, javax.swing.GroupLayout.Alignment.TRAILING))))
-                    .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jBCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(jBReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(jBHome, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(jBCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jBReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(jBSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 88, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -205,11 +209,13 @@ public class ViewCategory extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,29 +231,24 @@ public class ViewCategory extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBCategoriesActionPerformed
 
-    private void jCSelectCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSelectCategoryActionPerformed
-        
-       // jCSelectCategory.addActionListener(new ActionListener() {
-       // public void actionPerformed(ActionEvent event) {
-    }//GEN-LAST:event_jCSelectCategoryActionPerformed
-
     private void jBReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReturnActionPerformed
          new ViewReturnFilm().setVisible(true);
          dispose();
     }//GEN-LAST:event_jBReturnActionPerformed
 
-    private void jCSelectCategoryAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jCSelectCategoryAncestorAdded
-       
-        FilmDAO dao = new FilmDAO();
-        List<Film> list = new ArrayList<>();
-        
-        
-        
-    }//GEN-LAST:event_jCSelectCategoryAncestorAdded
-
     private void jBSearchCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchCategoryActionPerformed
               
     }//GEN-LAST:event_jBSearchCategoryActionPerformed
+
+    private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
+        new ViewSearch().setVisible(true);
+        dispose();
+
+    }//GEN-LAST:event_jBSearchActionPerformed
+
+    private void jBShowAllCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBShowAllCategoriesActionPerformed
+          showAllCategories();
+    }//GEN-LAST:event_jBShowAllCategoriesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,42 +290,41 @@ public class ViewCategory extends javax.swing.JFrame {
     private javax.swing.JButton jBCategories;
     private javax.swing.JButton jBHome;
     private javax.swing.JButton jBReturn;
+    private javax.swing.JButton jBSearch;
     private javax.swing.JButton jBSearchCategory;
-    private javax.swing.JComboBox jCSelectCategory;
+    private javax.swing.JButton jBShowAllCategories;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTFilms;
+    private javax.swing.JTable jTCategories;
+    private javax.swing.JTextField jTSearchCategory;
     // End of variables declaration//GEN-END:variables
     
-    public void Fillcombo() {
-        try {
-            stmt = con.prepareStatement("SELECT * FROM category ORDER BY categoryName");
-            rs = stmt.executeQuery();
-            
-            while(rs.next()) {
-                String categoryName = rs.getString("categoryName");
-                jCSelectCategory.addItem(categoryName);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+//    public void Fillcombo() {
+//        try {
+//            stmt = con.prepareStatement("SELECT * FROM category ORDER BY categoryName");
+//            rs = stmt.executeQuery();
+//            
+//            while(rs.next()) {
+//                String categoryName = rs.getString("categoryName");
+//                jCSelectCategory.addItem(categoryName);
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
+
+     public void showAllCategories() {
+        DefaultTableModel categoryTable = (DefaultTableModel) jTCategories.getModel();
+        categoryTable.setNumRows(0);
+
+        for (Category c : dao.showAllCategory()) {
+            categoryTable.addRow(new Object[]{
+                c.getCategoryId(),
+                c.getCategoryName(),});
         }
     }
-
-     public void ShowAllFilms() {
-        DefaultTableModel tableFilms = (DefaultTableModel) jTFilms.getModel();
-        tableFilms.setNumRows(0);
-
-        for (Film f : dao.showAllFilms()) {
-            tableFilms.addRow(new Object[]{
-                f.getFilmId(),
-                f.getTitle(),
-                f.getYear(),
-                f.getFilmTime(),
-                f.getCategoryName()
-            });
-        }
     }
-        }
+        

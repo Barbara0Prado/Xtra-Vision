@@ -2,7 +2,7 @@ package model;
  
 public class Film {
     
-  
+  Rent rent = new Rent();
 
     private String filmDirector;
     private int filmTime;
@@ -82,6 +82,10 @@ public class Film {
     @Override
     public String toString() {
         return getFilmId() + "";
+    }
+
+    public void setFilmTime(String filmTime) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
