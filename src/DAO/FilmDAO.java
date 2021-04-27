@@ -1,6 +1,7 @@
 package DAO;
 
 import model.Film;
+import model.Rent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,11 +25,10 @@ public class FilmDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO film VALUES(0, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO film VALUES(0, ?, ?, ?)");
             stmt.setString(1, film.getTitle());
-            stmt.setInt(2, film.getYear());
-            stmt.setInt(3, film.getFilmTime());
-            stmt.setInt(4, film.getCategoryId());
+            stmt.setInt(2, film.getFilmTime());
+            stmt.setInt(3, film.getCategoryId());
 
             if (stmt.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Film insert successfully!","Xtra-Vision",
@@ -67,7 +67,7 @@ public class FilmDAO {
         return (code + 1);
     }
 
-    public List<Film> showAllFilms() {
+    public List<Film> showAllFilm() {
         List<Film> list = new ArrayList<>();
         Connection con = Connect.getConnect();
         PreparedStatement stmt = null;
@@ -75,20 +75,17 @@ public class FilmDAO {
         boolean findFilm = false;
 
         try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.title, f.year\n"
-                    + "f.filmTime,  f.categoryId, cat.categoryName, cat.CategoryId\n"
-                    + "FROM film AS f, category as cat \n"
-                    + "WHERE f.categoryId = cat.categoryId");
+            stmt = con.prepareStatement("SELECT film.filmId, film.title, category.categoryName, film.filmTime\n "
+                    + "FROM film INNER JOIN category ON film.category_filmId = category.categoryId\n");
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Film film = new Film();
-                film .setFilmId(rs.getInt("f.filmId"));
-                film.setTitle(rs.getString("f.title"));
-                film.setYear(rs.getInt("f.year"));
-                film.setFilmTime(rs.getInt("f.filmTime"));
-                film.setCategoryName(rs.getString("cat.name"));
+                film.setFilmId(rs.getInt("film.filmId"));
+                film.setTitle(rs.getString("film.title"));
+                film.setFilmTime(rs.getInt("film.filmTime"));
+                film.setCategoryName(rs.getString("category.categoryName"));
                 
                 list.add(film);
                 findFilm = true;
@@ -108,49 +105,48 @@ public class FilmDAO {
         return list;
     }
 
-    public List<Film> searchById(int filmId) {
-        List<Film> list = new ArrayList<>();
-        Connection con = Connect.getConnect();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        boolean findFilm = false;
-
-        try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.title, f.year\n"
-                    + "f.filmTime,  f.categoryId, cat.categoryName, cat.CategoryId\n"
-                    + "FROM film AS f, category as cat \n"
-                    + "WHERE f.categoryId = cat.categoryId = ?");
-            
-            
-            
-            stmt.setInt(1, filmId);
-
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Film film = new Film();
-                film .setFilmId(rs.getInt("f.filmId"));
-                film.setTitle(rs.getString("f.title"));
-                film.setYear(rs.getInt("f.year"));
-                film.setFilmTime(rs.getInt("f.filmTime"));
-                film.setCategoryName(rs.getString("cat.name"));
-                list.add(film);
-                findFilm = true;
-            }
-
-            if (!findFilm) {
-                JOptionPane.showMessageDialog(null, "No title was foud",
-                        "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println("FilmDAO: " + ex);
-        } finally {
-            Connect.closeConnection(con, stmt, rs);
-        }
-
-        return list;
-    }
+//    public List<Film> searchById(int filmId) {
+//        List<Film> list = new ArrayList<>();
+//        Connection con = Connect.getConnect();
+//        PreparedStatement stmt = null;
+//        ResultSet rs = null;
+//        boolean findFilm = false;
+//
+//        try {
+//            stmt = con.prepareStatement("SELECT f.filmId, f.title\n"
+//                    + "f.filmTime,  f.category_filmId, cat.categoryName, cat.categoryId\n"
+//                    + "FROM film AS f, category as cat \n"
+//                    + "WHERE f.category_filmId = cat.categoryId = ?");
+//            
+//            
+//            
+//            stmt.setInt(1, filmId);
+//
+//            rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//                Film film = new Film();
+//                film .setFilmId(rs.getInt("f.filmId"));
+//                film.setTitle(rs.getString("f.title"));
+//                film.setFilmTime(rs.getInt("f.filmTime"));
+//                film.setCategoryName(rs.getString("cat.categoryName"));
+//                list.add(film);
+//                findFilm = true;
+//            }
+//
+//            if (!findFilm) {
+//                JOptionPane.showMessageDialog(null, "No title was foud",
+//                        "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.err.println("FilmDAO: " + ex);
+//        } finally {
+//            Connect.closeConnection(con, stmt, rs);
+//        }
+//
+//        return list;
+//    }
 
     public List<Film> searchByTitle(String filmTitle) {
         List<Film> list = new ArrayList<>();
@@ -160,10 +156,8 @@ public class FilmDAO {
         boolean findFilm = false;
 
         try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.title, f.year,\n"
-                    + "f.filmTime,  f.categoryId, cat.categoryName, cat.CategoryId\n"
-                    + "FROM film AS f, category as cat\n"
-                    + "WHERE f.categoryId = cat.categoryId AND f.title LIKE ?");
+            stmt = con.prepareStatement("SELECT film.filmId, film.title, category.categoryName, film.filmTime\n" +
+                             "FROM film INNER JOIN category ON film.category_filmId = category.categoryId AND film.title LIKE ?");
 
             stmt.setString(1, "%" + filmTitle + "%");
 
@@ -171,11 +165,10 @@ public class FilmDAO {
 
             while (rs.next()) {
                 Film film = new Film();
-                film .setFilmId(rs.getInt("f.filmId"));
-                film.setTitle(rs.getString("f.title"));
-                film.setYear(rs.getInt("f.year"));
-                film.setFilmTime(rs.getInt("f.filmTime"));
-                film.setCategoryName(rs.getString("cat.name"));
+                film .setFilmId(rs.getInt("film.filmId"));
+                film.setTitle(rs.getString("film.title"));
+                film.setFilmTime(rs.getInt("film.filmTime"));
+                film.setCategoryName(rs.getString("category.categoryName"));
              
                  list.add(film);
                 findFilm = true;
@@ -233,23 +226,30 @@ public class FilmDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.title, f.year, "
-                    + "f.filmTime, cat.name, f.categoryId "
-                    + "FROM filme AS f "
-                    + "JOIN category AS cat "
-                    + " WHERE f.idfilme = ?");
+            stmt = con.prepareStatement("SELECT film.filmId, \n" +
+                                        "film.title, \n" +
+                                        "film.filmTime, \n" +
+                                        "film.category_filmId, \n" +
+                                        "category.categoryName, \n" +
+                                        "rent.rentPrice \n" +
+                                        "FROM film \n" +
+                                        "INNER JOIN category \n" +
+                                        "ON film.category_filmId = category.categoryId\n" +
+                                        "INNER JOIN rent\n" +
+                                        "ON rent.rentId");
             stmt.setInt(1, FilmId);
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Film film = new Film();
-                film.setFilmId(rs.getInt("f.filmId"));
-                film.setTitle(rs.getString("f.title"));
-                film.setYear(rs.getInt("f.year"));
-                film.setFilmTime(rs.getInt("f.filmTime"));
-                film.setCategoryName(rs.getString("cat.name"));
-                film.setCategoryId(rs.getInt("f.categoryId"));
+                Rent rent = new Rent();
+                film.setFilmId(rs.getInt("film.filmId"));
+                film.setTitle(rs.getString("film.title"));
+                film.setFilmTime(rs.getInt("film.filmTime"));
+                film.setCategoryId(rs.getInt("film.category_filmId"));
+                film.setCategoryName(rs.getString("category.categoryName"));
+                rent.setRentPrice(rs.getDouble("rent.rentPrice"));
                
                 list.add(film);
             }
@@ -267,13 +267,12 @@ public class FilmDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE film SET title = ?, year = ?, filmTime = ?, categoryId = ?,"
+            stmt = con.prepareStatement("UPDATE film SET title = ?, filmTime = ?, categoryId = ?,"
                     + " WHERE filmId = ?");
             stmt.setString(1, film.getTitle());
-            stmt.setInt(2, film.getYear());
-            stmt.setInt(3, film.getFilmTime());
-            stmt.setInt(4, film.getCategoryId());
-            stmt.setInt(7, film.getFilmId());
+            stmt.setInt(2, film.getFilmTime());
+            stmt.setInt(3, film.getCategoryId());
+            stmt.setInt(4, film.getFilmId());
 
             if (stmt.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Data changed successfuly", "Xtra-Vision",
@@ -303,7 +302,7 @@ public class FilmDAO {
             stmt.setInt(1, filmId);
 
             if (stmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Film successfully deleted ", "Xtra-Vision",
+               JOptionPane.showMessageDialog(null, "Film successfully deleted ", "Xtra-Vision",
                         JOptionPane.INFORMATION_MESSAGE);
                           
             }
@@ -313,12 +312,8 @@ public class FilmDAO {
                         JOptionPane.WARNING_MESSAGE);
             
         } finally {
-            Connect.closeConnection(con, stmt);
+           Connect.closeConnection(con, stmt);
         }
     }
-
-
-   
-    
 
 }

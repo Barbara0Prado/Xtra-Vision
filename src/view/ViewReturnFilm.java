@@ -232,7 +232,7 @@ public class ViewReturnFilm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCreditCardActionPerformed
 
     private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
-        new ViewSearch().setVisible(true);
+        new ViewFilmSearch().setVisible(true);
         dispose();
     }//GEN-LAST:event_jBSearchActionPerformed
 

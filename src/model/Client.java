@@ -6,10 +6,9 @@ public class Client {
     private int clientId;
     private String clientName;
     private String clientEmail;
-    private int clientPhone;
+    private String creditCard;
 
-    
-
+   
     public int getClientId() {
         return clientId;
     }
@@ -33,17 +32,17 @@ public class Client {
     public void setClientEmail(String clientEmail) {
         this.clientEmail = clientEmail;
     }
-
-    public int getClientPhone() {
-        return clientPhone;
+    
+    public String getCreditCard() {
+        return creditCard;
     }
 
-    public void setClientPhone(int clientPhone) {
-        this.clientPhone = clientPhone;
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
     }
+    
      @Override
     public String toString() {
         return getClientId() + "";
     }
-    
 }

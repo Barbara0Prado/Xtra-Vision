@@ -10,7 +10,7 @@ import view.ViewCategory;
 import view.ViewReturnFilm;
 import DAO.FilmDAO;
 import model.Film;
-import view.ViewSearch;
+import view.ViewFilmSearch;
 
 
 public class Menu extends javax.swing.JFrame {
@@ -245,7 +245,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBHomeActionPerformed
 
     private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
-       new ViewSearch().setVisible(true);
+       new ViewFilmSearch().setVisible(true);
         dispose();
         
     }//GEN-LAST:event_jBSearchActionPerformed

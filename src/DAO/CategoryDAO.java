@@ -48,7 +48,7 @@ public class CategoryDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM category WHERE name = ?");
+            stmt = con.prepareStatement("SELECT * FROM category WHERE categoryName = ?");
             stmt.setString(1, name);
             rs = stmt.executeQuery();
 
@@ -121,14 +121,14 @@ public class CategoryDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT categoryId, name FROM category WHERE name LIKE ?");
+            stmt = con.prepareStatement("SELECT categoryId, categoryName FROM category WHERE categoryName LIKE ?");
             stmt.setString(1, "%" + Category + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Category category = new Category();
                 category.setCategoryId(rs.getInt("categoryId"));
-                category.setCategoryName(rs.getString("name"));
+                category.setCategoryName(rs.getString("categoryName"));
 
                 findCategory = true;
                 list.add(category);
@@ -157,14 +157,14 @@ public class CategoryDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT categoryId, name FROM Category WHERE categoryId = ?");
+            stmt = con.prepareStatement("SELECT categoryId, categoryName FROM Category WHERE categoryId = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Category category = new Category();
                 category.setCategoryId(rs.getInt("categoryId"));
-                category.setCategoryName(rs.getString("name"));
+                category.setCategoryName(rs.getString("categoryName"));
 
                 findCategory = true;
 
@@ -217,14 +217,14 @@ public class CategoryDAO {
         return list;
     }
 
-    public void changeCategoryData(int categoryId, String name) {
+    public void changeCategoryData(int categoryId, String categoryName) {
         Connection con = Connect.getConnect();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE category SET name = ? WHERE categoryId = ?");
-            stmt.setString(1, name);
+            stmt = con.prepareStatement("UPDATE category SET categoryName = ? WHERE categoryId = ?");
+            stmt.setString(1, categoryName);
             stmt.setInt(2, categoryId);
 
             if (stmt.executeUpdate() > 0) {
@@ -256,7 +256,7 @@ public class CategoryDAO {
                 Category category = new Category();
 
                 category.setCategoryId(rs.getInt("categoryId"));
-                category.setCategoryName(rs.getString("name"));
+                category.setCategoryName(rs.getString("categoryName"));
 
                 list.add(category);
 
@@ -305,13 +305,13 @@ public class CategoryDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT categoryId, name FROM category WHERE categoryId = ?");
+            stmt = con.prepareStatement("SELECT categoryId, categoryName FROM category WHERE categoryId = ?");
             stmt.setInt(1, catId);
 
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                title = rs.getString("name");
+                title = rs.getString("categoryName");
             }
 
         } catch (SQLException ex) {

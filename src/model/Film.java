@@ -9,7 +9,6 @@ public class Film {
     private int filmId;
     private int categoryId;
     private String title;
-    private int year;
     private String categoryName;
     private String synopsis;
     
@@ -54,14 +53,6 @@ public class Film {
 
     public void setTitle(String titulo) {
         this.title = title;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
     public String getCategoryName() {
