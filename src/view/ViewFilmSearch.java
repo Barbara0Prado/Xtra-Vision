@@ -32,7 +32,7 @@ public class ViewFilmSearch extends javax.swing.JFrame {
         jBSearchTitle = new javax.swing.JButton();
         jBShowAllFilms = new javax.swing.JButton();
         jBViewFilm = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBRentNow = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jBHome = new javax.swing.JButton();
         jBCategories = new javax.swing.JButton();
@@ -110,12 +110,12 @@ public class ViewFilmSearch extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(java.awt.Color.darkGray);
-        jButton2.setForeground(java.awt.Color.white);
-        jButton2.setText("Rent Now");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBRentNow.setBackground(java.awt.Color.darkGray);
+        jBRentNow.setForeground(java.awt.Color.white);
+        jBRentNow.setText("Rent Now");
+        jBRentNow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBRentNowActionPerformed(evt);
             }
         });
 
@@ -142,7 +142,7 @@ public class ViewFilmSearch extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBViewFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBRentNow, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -162,7 +162,7 @@ public class ViewFilmSearch extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBRentNow, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBViewFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -307,13 +307,20 @@ public class ViewFilmSearch extends javax.swing.JFrame {
     private void jBViewFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBViewFilmActionPerformed
         int line = jTSearch.getSelectedRow();
             if (line > -1) {
-                ;
+                
+                int filmId = (Integer) jTSearch.getValueAt(jTSearch.getSelectedRow(), 0);
+                
+                ViewFilm viewFilm = new ViewFilm();
+                viewFilm.film.setFilmId(filmId);
+                viewFilm.showFilmInfo();
+                viewFilm.setVisible(true);
+                dispose();
+          
             } else {
                 JOptionPane.showMessageDialog(this, "Please, select one title!");
             }
             
-        new ViewFilm().setVisible(true);
-            dispose();
+        
     }//GEN-LAST:event_jBViewFilmActionPerformed
 
     private void jTSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTSearchMouseClicked
@@ -324,9 +331,17 @@ public class ViewFilmSearch extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTSearchMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jBRentNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRentNowActionPerformed
+        int line = jTSearch.getSelectedRow();
+            if (line > -1) {
+                        new ViewFilm().setVisible(true);
+                        dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Please, select one title!");
+            }
+            
+           
+    }//GEN-LAST:event_jBRentNowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,13 +382,13 @@ public class ViewFilmSearch extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCategories;
     private javax.swing.JButton jBHome;
+    private javax.swing.JButton jBRentNow;
     private javax.swing.JButton jBReturnFilm;
     private javax.swing.JButton jBSearch;
     private javax.swing.JButton jBSearchTitle;
     private javax.swing.JButton jBShowAllFilms;
     private javax.swing.JButton jBViewFilm;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

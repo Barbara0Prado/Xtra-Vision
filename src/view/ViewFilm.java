@@ -2,6 +2,7 @@
 package view;
 
 import DAO.FilmDAO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Film;
 import xtra.vision.Menu;
@@ -10,6 +11,7 @@ import xtra.vision.Menu;
 public class ViewFilm extends javax.swing.JFrame {
 
     FilmDAO dao = new FilmDAO();
+    Film film = new Film();
     
     public ViewFilm() {
         initComponents();
@@ -228,7 +230,17 @@ public class ViewFilm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTViewFilmMouseClicked
 
     private void jBRentNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRentNowActionPerformed
-        // TODO add your handling code here:
+        int line = jTViewFilm.getSelectedRow();
+            if (line > -1) {
+                
+            new ViewFilm().setVisible(true);
+            dispose();
+                ;
+            } else {
+                JOptionPane.showMessageDialog(this, "Please, select one title!");
+            }
+            
+        
     }//GEN-LAST:event_jBRentNowActionPerformed
 
     /**
@@ -281,17 +293,35 @@ public class ViewFilm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
      public void showFilmInfo() {
-        DefaultTableModel viewFilm = (DefaultTableModel) jTViewFilm.getModel();
-        viewFilm.setNumRows(0);
-
-        for (Film f : dao.gettingBackFilmData(WIDTH)) {
-            viewFilm.addRow(new Object[]{
-                f.getFilmId(),
-                f.getTitle(),
-                f.getCategoryName(),
-                f.getFilmTime()
-                });
+//        DefaultTableModel viewFilm = (DefaultTableModel) jTViewFilm.getModel();
+//        viewFilm.setNumRows(0);
+//
+//        for (Film f : dao.gettingBackFilmData(WIDTH)) {
+//            viewFilm.addRow(new Object[]{
+//                f.getFilmId(),
+//                f.getTitle(),
+//                f.getCategoryName(),
+//                f.getFilmTime()
+//                });
             
+    //    }
+         
+         DefaultTableModel viewFilm = (DefaultTableModel) jTViewFilm.getModel();
+         viewFilm.setNumRows(0);
+         
+         Film selectedFilm = dao.searchById(film.getFilmId());
+         
+         if(selectedFilm != null){
+
+         viewFilm.addRow(new Object[]{
+                selectedFilm.getTitle(),
+                selectedFilm.getSynopsis(),
+                selectedFilm.getCategoryName(),
+                selectedFilm.getFilmDirector(),
+                selectedFilm.getFilmTime(),
+                selectedFilm.getPrice()
+         });
         }
-    }
+     }
+   
 }

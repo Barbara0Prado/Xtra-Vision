@@ -122,7 +122,7 @@ public class CategoryDAO {
 
         try {
             stmt = con.prepareStatement("SELECT categoryId, categoryName FROM category WHERE categoryName LIKE ?");
-            stmt.setString(1, "%" + Category + "%");
+            stmt.setString(1,  Category + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

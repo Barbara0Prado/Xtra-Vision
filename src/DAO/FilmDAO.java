@@ -105,48 +105,52 @@ public class FilmDAO {
         return list;
     }
 
-//    public List<Film> searchById(int filmId) {
-//        List<Film> list = new ArrayList<>();
-//        Connection con = Connect.getConnect();
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        boolean findFilm = false;
-//
-//        try {
-//            stmt = con.prepareStatement("SELECT f.filmId, f.title\n"
-//                    + "f.filmTime,  f.category_filmId, cat.categoryName, cat.categoryId\n"
-//                    + "FROM film AS f, category as cat \n"
-//                    + "WHERE f.category_filmId = cat.categoryId = ?");
-//            
-//            
-//            
-//            stmt.setInt(1, filmId);
-//
-//            rs = stmt.executeQuery();
-//
-//            while (rs.next()) {
-//                Film film = new Film();
-//                film .setFilmId(rs.getInt("f.filmId"));
-//                film.setTitle(rs.getString("f.title"));
-//                film.setFilmTime(rs.getInt("f.filmTime"));
-//                film.setCategoryName(rs.getString("cat.categoryName"));
-//                list.add(film);
-//                findFilm = true;
-//            }
-//
-//            if (!findFilm) {
-//                JOptionPane.showMessageDialog(null, "No title was foud",
-//                        "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.err.println("FilmDAO: " + ex);
-//        } finally {
-//            Connect.closeConnection(con, stmt, rs);
-//        }
-//
-//        return list;
-//    }
+    public Film searchById(int filmId) {
+        Connection con = Connect.getConnect();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean findFilm = false;
+        Film film = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT f.filmId, f.title, \n"
+                    + "f.filmTime,  f.category_filmId, cat.categoryName, cat.categoryId, \n"
+                    + "f.synopsis, f.filmDirector, f.filmPrice "
+                    + "FROM film AS f, category as cat \n"
+                    + "WHERE f.category_filmId = cat.categoryId \n"
+                    + "AND f.filmId = ?");
+            
+            
+            
+            stmt.setInt(1, filmId);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                film = new Film();
+                film .setFilmId(rs.getInt("f.filmId"));
+                film.setTitle(rs.getString("f.title"));
+                film.setFilmTime(rs.getInt("f.filmTime"));
+                film.setCategoryName(rs.getString("cat.categoryName"));
+                film.setFilmDirector(rs.getString("f.filmDirector"));
+                film.setSynopsis(rs.getString("f.synopsis"));
+                film.setPrice(rs.getDouble("f.filmPrice"));
+                findFilm = true;
+            }
+
+            if (!findFilm) {
+                JOptionPane.showMessageDialog(null, "No title was found",
+                        "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("FilmDAO: " + ex);
+        } finally {
+            Connect.closeConnection(con, stmt, rs);
+        }
+
+        return film;
+    }
 
     public List<Film> searchByTitle(String filmTitle) {
         List<Film> list = new ArrayList<>();

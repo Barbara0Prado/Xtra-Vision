@@ -2,7 +2,7 @@ package model;
  
 public class Film {
     
-  Rent rent = new Rent();
+  private Rent rent = new Rent();
 
     private String filmDirector;
     private int filmTime;
@@ -11,6 +11,7 @@ public class Film {
     private String title;
     private String categoryName;
     private String synopsis;
+    private double price;
     
 
    
@@ -51,7 +52,7 @@ public class Film {
         return title;
     }
 
-    public void setTitle(String titulo) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -77,6 +78,22 @@ public class Film {
 
     public void setFilmTime(String filmTime) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Rent getRent() {
+        return rent;
+    }
+
+    public void setRent(Rent rent) {
+        this.rent = rent;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
     
 }
