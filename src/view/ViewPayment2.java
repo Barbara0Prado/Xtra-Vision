@@ -5,11 +5,14 @@
  */
 package view;
 
+import DAO.CardDAO;
+import model.Card;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.EventHandler;
 import javafx.beans.value.ObservableValue;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import xtra.vision.Menu;
 
 /**
@@ -18,7 +21,7 @@ import xtra.vision.Menu;
  */
 public class ViewPayment2{
 
- 
+ CardDAO dao = new CardDAO();
 
 public ViewPayment2() {
 
@@ -99,6 +102,8 @@ public ViewPayment2() {
         jButton2.setText("Pay Now");
         
         jButton2.setEnabled(false);
+        
+        JOptionPane.showMessageDialog(null, "Successful payment");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -312,6 +317,19 @@ public ViewPayment2() {
     private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new ViewFilmSearch().setVisible(true);
         //dispose();
+    }                     
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        
+      if (dao.checkCreditCard(cardNumber)) {
+            JOptionPane.showMessageDialog(null, "Successful payment.",
+                    "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Card card = new Card();
+
+            card.setCardNumber(cardNumber);
+
+            dao.checkCardInfo(cardNumber);
+}
     }                                        
 
    
@@ -341,7 +359,7 @@ public ViewPayment2() {
 
         
                 System.out.println("xxxxx");
-               new ViewPayment2();
+                new ViewPayment2();
         
 
 
