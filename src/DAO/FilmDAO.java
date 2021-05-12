@@ -59,7 +59,7 @@ public class FilmDAO {
                 code = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            System.out.println("Film DAO: " + ex);
+            System.out.println("FilmDAO: " + ex);
         } finally {
             Connect.closeConnection(con, stmt);
         }
@@ -75,7 +75,7 @@ public class FilmDAO {
         boolean findFilm = false;
 
         try {
-            stmt = con.prepareStatement("SELECT film.filmId, film.title, category.categoryName, film.filmTime\n "
+            stmt = con.prepareStatement("SELECT film.filmId, film.title, film.total, category.categoryName, film.filmTime\n "
                     + "FROM film INNER JOIN category ON film.category_filmId = category.categoryId\n");
 
             rs = stmt.executeQuery();
@@ -86,7 +86,7 @@ public class FilmDAO {
                 film.setTitle(rs.getString("film.title"));
                 film.setFilmTime(rs.getInt("film.filmTime"));
                 film.setCategoryName(rs.getString("category.categoryName"));
-                
+                film.setTotal(rs.getInt("film.total"));
                 list.add(film);
                 findFilm = true;
             }
@@ -113,7 +113,7 @@ public class FilmDAO {
         Film film = null;
 
         try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.title, \n"
+            stmt = con.prepareStatement("SELECT f.filmId, f.total, f.title, \n"
                     + "f.filmTime,  f.category_filmId, cat.categoryName, cat.categoryId, \n"
                     + "f.synopsis, f.filmDirector, f.filmPrice "
                     + "FROM film AS f, category as cat \n"
@@ -135,6 +135,8 @@ public class FilmDAO {
                 film.setFilmDirector(rs.getString("f.filmDirector"));
                 film.setSynopsis(rs.getString("f.synopsis"));
                 film.setPrice(rs.getDouble("f.filmPrice"));
+                film.setTotal(rs.getInt("film.total"));
+                
                 findFilm = true;
             }
 
@@ -160,7 +162,7 @@ public class FilmDAO {
         boolean findFilm = false;
 
         try {
-            stmt = con.prepareStatement("SELECT film.filmId, film.title, category.categoryName, film.filmTime\n" +
+            stmt = con.prepareStatement("SELECT film.filmId, film.title,film.total, category.categoryName, film.filmTime\n" +
                              "FROM film INNER JOIN category ON film.category_filmId = category.categoryId AND film.title LIKE ?");
 
             stmt.setString(1, "%" + filmTitle + "%");
@@ -173,6 +175,7 @@ public class FilmDAO {
                 film.setTitle(rs.getString("film.title"));
                 film.setFilmTime(rs.getInt("film.filmTime"));
                 film.setCategoryName(rs.getString("category.categoryName"));
+                film.setTotal(rs.getInt("film.total"));
              
                  list.add(film);
                 findFilm = true;

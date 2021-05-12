@@ -51,7 +51,7 @@ public class ViewFilmSearch extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Film Id", "Title", "Category", "Time"
+                "Film Id", "Title", "Category", "Time", "Total"
             }
         ));
         jTSearch.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -334,7 +334,7 @@ public class ViewFilmSearch extends javax.swing.JFrame {
     private void jBRentNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRentNowActionPerformed
         int line = jTSearch.getSelectedRow();
             if (line > -1) {
-                        new ViewFilm().setVisible(true);
+                        new ViewPayment2();
                         dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Please, select one title!");
@@ -406,7 +406,8 @@ public class ViewFilmSearch extends javax.swing.JFrame {
                 f.getFilmId(),
                 f.getTitle(),
                 f.getCategoryName(),
-                f.getFilmTime()
+                f.getFilmTime(),
+                f.getTotal()
                 });
         }
     }
@@ -421,7 +422,8 @@ public class ViewFilmSearch extends javax.swing.JFrame {
                 f.getFilmId(),
                 f.getTitle(),
                 f.getCategoryName(),
-                f.getFilmTime()
+                f.getFilmTime(),
+                f.getTotal()
                 });
         }
     }

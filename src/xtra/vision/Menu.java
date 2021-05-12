@@ -247,7 +247,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSearchActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+        //jTView
+               // FilmString filmTitle = jTFSearch.getText();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     /**

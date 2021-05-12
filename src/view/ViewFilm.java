@@ -319,7 +319,10 @@ public class ViewFilm extends javax.swing.JFrame {
                 selectedFilm.getCategoryName(),
                 selectedFilm.getFilmDirector(),
                 selectedFilm.getFilmTime(),
-                selectedFilm.getPrice()
+                selectedFilm.getPrice(),
+                selectedFilm.getTotal()
+                
+                
          });
         }
      }

@@ -12,6 +12,7 @@ public class Film {
     private String categoryName;
     private String synopsis;
     private double price;
+    private int total;
     
 
    
@@ -94,6 +95,14 @@ public class Film {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
     
 }
