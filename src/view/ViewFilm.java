@@ -233,7 +233,7 @@ public class ViewFilm extends javax.swing.JFrame {
         int line = jTViewFilm.getSelectedRow();
             if (line > -1) {
                 
-            new ViewFilm().setVisible(true);
+            new ViewPayment2();
             dispose();
                 ;
             } else {
@@ -293,18 +293,6 @@ public class ViewFilm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
      public void showFilmInfo() {
-//        DefaultTableModel viewFilm = (DefaultTableModel) jTViewFilm.getModel();
-//        viewFilm.setNumRows(0);
-//
-//        for (Film f : dao.gettingBackFilmData(WIDTH)) {
-//            viewFilm.addRow(new Object[]{
-//                f.getFilmId(),
-//                f.getTitle(),
-//                f.getCategoryName(),
-//                f.getFilmTime()
-//                });
-            
-    //    }
          
          DefaultTableModel viewFilm = (DefaultTableModel) jTViewFilm.getModel();
          viewFilm.setNumRows(0);
@@ -319,10 +307,7 @@ public class ViewFilm extends javax.swing.JFrame {
                 selectedFilm.getCategoryName(),
                 selectedFilm.getFilmDirector(),
                 selectedFilm.getFilmTime(),
-                selectedFilm.getPrice(),
-                selectedFilm.getTotal()
-                
-                
+                selectedFilm.getPrice(),    
          });
         }
      }

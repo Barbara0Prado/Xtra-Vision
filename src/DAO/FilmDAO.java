@@ -17,55 +17,6 @@ public class FilmDAO {
     public static ArrayList<Film> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
-
-    public void insertFilm (Film film) {
-        
-        Connection con = Connect.getConnect();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("INSERT INTO film VALUES(0, ?, ?, ?)");
-            stmt.setString(1, film.getTitle());
-            stmt.setInt(2, film.getFilmTime());
-            stmt.setInt(3, film.getCategoryId());
-
-            if (stmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Film insert successfully!","Xtra-Vision",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error to insert film!", "Xtra-Vision",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println("FilmDAO: " + ex);
-        } finally {
-            Connect.closeConnection(con, stmt);
-        }
-    }
-
-    public int getLastResgister() {
-        int code = 0;
-        Connection con = Connect.getConnect();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            stmt = con.prepareStatement("SELECT MAX(filmId) FROM film");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                code = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            System.out.println("FilmDAO: " + ex);
-        } finally {
-            Connect.closeConnection(con, stmt);
-        }
-
-        return (code + 1);
-    }
 
     public List<Film> showAllFilm() {
         List<Film> list = new ArrayList<>();
@@ -75,8 +26,7 @@ public class FilmDAO {
         boolean findFilm = false;
 
         try {
-            stmt = con.prepareStatement("SELECT film.filmId, film.title, film.total, category.categoryName, film.filmTime\n "
-                    + "FROM film INNER JOIN category ON film.category_filmId = category.categoryId\n");
+            stmt = con.prepareStatement("SELECT film.filmId, film.title, film.total, category.categoryName, film.filmTime FROM film INNER JOIN category ON film.category_filmId = category.categoryId");
 
             rs = stmt.executeQuery();
 
@@ -113,7 +63,7 @@ public class FilmDAO {
         Film film = null;
 
         try {
-            stmt = con.prepareStatement("SELECT f.filmId, f.total, f.title, \n"
+            stmt = con.prepareStatement("SELECT f.filmId, f.title, \n"
                     + "f.filmTime,  f.category_filmId, cat.categoryName, cat.categoryId, \n"
                     + "f.synopsis, f.filmDirector, f.filmPrice "
                     + "FROM film AS f, category as cat \n"
@@ -135,7 +85,6 @@ public class FilmDAO {
                 film.setFilmDirector(rs.getString("f.filmDirector"));
                 film.setSynopsis(rs.getString("f.synopsis"));
                 film.setPrice(rs.getDouble("f.filmPrice"));
-                film.setTotal(rs.getInt("film.total"));
                 
                 findFilm = true;
             }
@@ -267,60 +216,6 @@ public class FilmDAO {
         }
 
         return list;
-    }
-
-    public void changeFilmData(Film film) {
-        Connection con = Connect.getConnect();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement("UPDATE film SET title = ?, filmTime = ?, categoryId = ?,"
-                    + " WHERE filmId = ?");
-            stmt.setString(1, film.getTitle());
-            stmt.setInt(2, film.getFilmTime());
-            stmt.setInt(3, film.getCategoryId());
-            stmt.setInt(4, film.getFilmId());
-
-            if (stmt.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Data changed successfuly", "Xtra-Vision",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error to change the data", "Xtra-Vision",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-
-        } catch (SQLException ex) {
-            System.err.println("FilmDAO: " + ex);
-        } finally {
-            Connect.closeConnection(con, stmt);
-        }
-    }
-
-     
-
-    public void deleteFilm(int filmId) {
-
-        Connection con = Connect.getConnect();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            stmt = con.prepareStatement("DELETE FROM film WHERE filmId = ?");
-            stmt.setInt(1, filmId);
-
-            if (stmt.executeUpdate() > 0) {
-               JOptionPane.showMessageDialog(null, "Film successfully deleted ", "Xtra-Vision",
-                        JOptionPane.INFORMATION_MESSAGE);
-                          
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error to try deleting the film", "Xtra-Vision",
-                        JOptionPane.WARNING_MESSAGE);
-            
-        } finally {
-           Connect.closeConnection(con, stmt);
-        }
     }
 
 }

@@ -334,8 +334,12 @@ public class ViewFilmSearch extends javax.swing.JFrame {
     private void jBRentNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRentNowActionPerformed
         int line = jTSearch.getSelectedRow();
             if (line > -1) {
-                        new ViewPayment2();
-                        dispose();
+                       new ViewPayment2();
+                       dispose();
+                      
+                       //Static variable to save the film ID from the row selected
+                      Film.saveId = Integer.parseInt(jTSearch.getValueAt(jTSearch.getSelectedRow(), 0).toString());
+
             } else {
                 JOptionPane.showMessageDialog(this, "Please, select one title!");
             }

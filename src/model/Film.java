@@ -13,6 +13,7 @@ public class Film {
     private String synopsis;
     private double price;
     private int total;
+    public static int saveId = -1;
     
 
    

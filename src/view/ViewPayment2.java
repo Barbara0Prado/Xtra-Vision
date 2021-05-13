@@ -102,8 +102,6 @@ public ViewPayment2() {
         jButton2.setText("Pay Now");
         
         jButton2.setEnabled(false);
-        
-        JOptionPane.showMessageDialog(null, "Successful payment");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -111,6 +109,11 @@ public ViewPayment2() {
         jTextArea1.setText("You are providing your personal data to Xtra-Vision\nInc., subject to our Privicy & Cookie Policy.");
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
      
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -320,16 +323,10 @@ public ViewPayment2() {
     }                     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         
-      if (dao.checkCreditCard(cardNumber)) {
-            JOptionPane.showMessageDialog(null, "Successful payment.",
+      if (dao.checkCreditCard(jTxtCardInfo.getText())) {
+            JOptionPane.showMessageDialog(null, "Successful payment! The rent period is 5 days",
                     "Xtra-Vision", JOptionPane.WARNING_MESSAGE);
-        } else {
-            Card card = new Card();
-
-            card.setCardNumber(cardNumber);
-
-            dao.checkCardInfo(cardNumber);
-}
+        } 
     }                                        
 
    
@@ -357,17 +354,11 @@ public ViewPayment2() {
         }
         //</editor-fold>
 
-        
-                System.out.println("xxxxx");
                 new ViewPayment2();
-        
-
-
+       
 
     }
     
-
-  
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jBCategories;
